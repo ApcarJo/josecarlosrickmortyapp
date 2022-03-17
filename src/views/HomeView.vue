@@ -1,12 +1,14 @@
 <template>
-  <div class="">
+  <div class="" v-if="data" >
     <template v-for="(item, index) in data">
-      <div :key="index">
-        {{ item }}
+      <div :key="index" class="flex flex-col items-center justify-center">
+        <div class="bg-gray-200 flex-col items-center justify-center rounded-xl p-12 mb-12">
+        <img :src="item.image"/>
+          <h3><span>{{ item.name }}</span></h3>
+        </div>
       </div>
     </template>
   </div>
-
 </template>
 
 <script>
@@ -16,6 +18,7 @@ export default {
 
   data() {
     return {
+      res: null,
       data: null,
     };
   },
@@ -25,10 +28,10 @@ export default {
   },
 
   methods: {
-    getInfo: async function(){
-      this.data = await getCharacters();
-      console.log(this.data)
+    async getInfo() {
+      this.res = await getCharacters();
+      this.data = this.res.data.results;
     }
-  }
+  },
 };
 </script>

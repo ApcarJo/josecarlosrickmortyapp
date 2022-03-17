@@ -10,9 +10,9 @@ export default {
       required: true,
     },
   },
-  created() {
+  mounted() {
     axios.get(this.apiAddress).then((response) => {
-      this.$emit("response", response.data);
+      this.$emit('response', response.data);
     });
   },
 };
