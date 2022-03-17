@@ -1,18 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div class="">
+    <template v-for="(item, index) in data">
+      <div :key="index">
+        {{ item }}
+      </div>
+    </template>
   </div>
+
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import {getCharacters} from "./../utils/ApiCall";
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
+
+  data() {
+    return {
+      data: null,
+    };
   },
+
+  mounted() {
+    this.getInfo();
+  },
+
+  methods: {
+    getInfo: async function(){
+      this.data = await getCharacters();
+      console.log(this.data)
+    }
+  }
 };
 </script>
